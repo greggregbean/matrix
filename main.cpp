@@ -13,10 +13,14 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    std::cout << "Matrix:" << std::endl;
     matrix A (n, numbers);
     A.checkout();
 
+    std::cout << "Alebraic addition to (1,1):" << std::endl;
     matrix A_addition = A.make_addition(1, 1);
     A_addition.checkout();
+
+    std::cout << "Determinant = " <<  A.determinant() << std::endl;
 
 }

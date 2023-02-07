@@ -39,13 +39,20 @@ matrix matrix::make_addition(int i, int k) {
     return addition;
 }
 
-// double matrix::determinant() {
-//     double result = 0;
+double matrix::determinant() {
+    if (size == 1) return (data[0]);
 
-//     for(int i = 0; i < size; ++i) {
-//         result += (data[i])*determinant(make_addition());
+    matrix addition = make_addition(0, 0); 
+    double result = 0;
+    int sign = 1;
 
-//     }
+    for(int k = 0; k < size; ++k) {
+        result += (sign)*(data[k])*(addition.determinant());
+        sign *= (-1);
+        if((k+1) != size) {
+            addition = make_addition(0, k+1);
+        }
+    }
 
-//     return result;
-// }
+    return result;
+}

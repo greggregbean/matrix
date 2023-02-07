@@ -11,7 +11,7 @@ class matrix {
         matrix(size_t n, double* numbers);
         void checkout();
         matrix make_addition(int i, int k);
-        //void determinant();
+        double determinant();
 };
 
 
