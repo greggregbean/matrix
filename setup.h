@@ -2,6 +2,7 @@
 #define SETUP_H
 
 #include <iostream>
+#include <iomanip>
 
 class matrix {
     private:

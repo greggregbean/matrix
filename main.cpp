@@ -22,5 +22,4 @@ int main(int argc, char* argv[]) {
     A_addition.checkout();
 
     std::cout << "Determinant = " <<  A.determinant() << std::endl;
-
 }

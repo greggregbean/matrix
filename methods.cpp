@@ -13,7 +13,7 @@ void matrix::checkout() {
     for (int i = 0; i < size; ++i) {
         std::cout << "| ";
         for(int k = 0; k < size; ++k) {
-            std::cout << data[size*i + k] << " ";
+            std::cout << std::setw(2u) << data[size*i + k] << std::setw(2u) << " ";
         }
         std::cout << "|" << std::endl;
     }
