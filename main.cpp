@@ -4,6 +4,7 @@ int main(int argc, char* argv[]) {
     size_t n;
     std::cout << "Enter size of matrix: " << std::endl;
     std::cin >> n;
+    std::cout << std::endl;
 
     double numbers[n*n];
     std::cout << "Enter data of matrix: " << std::endl;
@@ -12,6 +13,7 @@ int main(int argc, char* argv[]) {
             std::cin >> numbers[n*i + k];
         }
     }
+    std::cout << std::endl;
 
     std::cout << "Matrix:" << std::endl;
     matrix A (n, numbers);
@@ -21,5 +23,9 @@ int main(int argc, char* argv[]) {
     matrix A_addition = A.make_addition(1, 1);
     A_addition.checkout();
 
-    std::cout << "Determinant = " <<  A.determinant() << std::endl;
+    std::cout << "Determinant = " <<  A.determinant() << "\n" << std::endl;
+    
+    std::cout << "Matrix after 0str - 2str:" << std::endl;
+    A.str_sub(0, 2);
+    A.checkout();
 }

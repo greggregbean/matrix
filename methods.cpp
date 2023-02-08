@@ -2,7 +2,7 @@
 
 matrix::matrix(size_t n, double* numbers): size(n) {
     data = new double[n*n];
-    for(size_t i = 0; i < n; ++i) {
+    for(int i = 0; i < n; ++i) {
         for(int k = 0; k < size; ++k) {
             data[size*i + k] = numbers[size*i + k];
         }
@@ -17,7 +17,20 @@ void matrix::checkout() {
         }
         std::cout << "|" << std::endl;
     }
+    std::cout << std::endl;
 }
+
+void matrix::str_sub(int a, int b) {
+    for (int k = 0; k < size; ++k) {
+        data[size*a + k] -= data[size*b + k]; 
+    }
+}
+
+// void matrix::makediag() {
+//     for (int i = 0; i < size; ++i) {
+        
+//     }
+// }
 
 matrix matrix::make_addition(int i, int k) {
     double numbers[(size-1)*(size-1)];
