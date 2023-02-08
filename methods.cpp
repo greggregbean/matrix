@@ -20,9 +20,9 @@ void matrix::checkout() {
     std::cout << std::endl;
 }
 
-void matrix::str_sub(int a, int b) {
+void matrix::str_sub(int a, int b, int lambda) {
     for (int k = 0; k < size; ++k) {
-        data[size*a + k] -= data[size*b + k]; 
+        data[size*a + k] -= lambda * data[size*b + k]; 
     }
 }
 

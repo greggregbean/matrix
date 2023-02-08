@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 
     std::cout << "Determinant = " <<  A.determinant() << "\n" << std::endl;
     
-    std::cout << "Matrix after 0str - 2str:" << std::endl;
-    A.str_sub(0, 2);
+    std::cout << "Matrix after 0str - 2 * 2str:" << std::endl;
+    A.str_sub(0, 2, 2);
     A.checkout();
 }

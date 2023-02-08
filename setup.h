@@ -11,7 +11,7 @@ class matrix {
     public:
         matrix(size_t n, double* numbers);
         void checkout();
-        void str_sub(int a, int b);
+        void str_sub(int a, int b, int lambda);
         //matrix make_diag();
         matrix make_addition(int i, int k);
         double determinant();
