@@ -31,4 +31,6 @@ int main() {
 
     std::cout << "Matrix to upper trianglular matrix:" << std::endl;
     A.to_up_triangale();
+
+    std::cout << "Gauss determinant = " << A.gauss_det() << std::endl;
 }
