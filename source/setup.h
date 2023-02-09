@@ -6,15 +6,18 @@
 
 class matrix {
     private:
-        size_t size;
+        int size;
         double* data;
     public:
         matrix(size_t n, double* numbers);
         void checkout();
-        void str_sub(int a, int b, int lambda);
-        //matrix make_diag();
-        matrix make_addition(int i, int k);
-        double determinant();
+
+        void str_sub(int a, int b, double lambda);
+        void to_up_triangale();
+        void make_diag();
+        
+        matrix make_addition(int i, int j);
+        double minor_det();
 };
 
 
