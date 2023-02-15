@@ -20,3 +20,8 @@ void matrix::checkout() {
     std::cout << std::endl;
 }
 
+matrix matrix::cpy() {
+    matrix cpy(size, data);
+    return cpy;
+}
+

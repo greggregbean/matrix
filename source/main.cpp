@@ -19,6 +19,10 @@ int main() {
     matrix A (n, numbers);
     A.checkout();
 
+    // std::cout << "Matrix copy:" << std::endl;
+    // matrix A_cpy = A.cpy();
+    // A_cpy.checkout();
+
     // std::cout << "Alebraic addition to (2,2):" << std::endl;
     // matrix A_addition = A.make_addition(2, 2);
     // A_addition.checkout();
@@ -33,5 +37,9 @@ int main() {
     // A.str_sub(1, 0, 3.5);
     // A.checkout();
 
-    std::cout << "Gauss determinant = " << A.gauss_det() << std::endl;
+    long double res_of_gauss_det = A.gauss_det();
+    std::cout << "Gauss determinant = " << res_of_gauss_det << "\n" << std::endl;
+
+    // std::cout << "Matrix one more time:" << std::endl;
+    // A.checkout();
 }

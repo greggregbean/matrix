@@ -18,6 +18,7 @@ void matrix::switch_str(int a, int b) {
 
 int matrix::to_up_triangale() {
     int count_switch = 0;
+
     for (int i = 0; i < size; ++i) {
         if (data[i*size + i ] == 0) {
             int n;
@@ -43,13 +44,23 @@ int matrix::to_up_triangale() {
     return count_switch;
 }
 
-long double matrix::gauss_det() {
-    long double det;
-    if ((to_up_triangale() % 2) == 0) det = 1;
-    else det = -1;
+long double matrix::mul_diag() {
+    long double res = 1;
     for (int i = 0; i < size; ++i) {
         if (data[i*size + i] == 0) return 0;
-        det *= data[i*size + i];
+        res *= data[i*size + i];
     }
+    return res;
+}
+
+long double matrix::gauss_det() {
+    matrix cpy = this -> cpy();
+
+    long double det;
+    if ((cpy.to_up_triangale() % 2) == 0) det = 1;
+    else det = -1;
+
+    det *= cpy.mul_diag();
+    
     return det;
 }
