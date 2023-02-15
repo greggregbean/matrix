@@ -1,9 +1,9 @@
 #include "setup.h"
 
-matrix::matrix(int n, double* numbers): size(n) {
-    data = new double[n*n];
-    for(int i = 0; i < n; ++i) {
-        for(int j = 0; j < size; ++j) {
+matrix::matrix(int n, long double* numbers): size(n) {
+    data = new long double[n*n];
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < size; ++j) {
             data[i*size + j] = numbers[i*size + j];
         }
     }

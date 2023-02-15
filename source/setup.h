@@ -7,18 +7,19 @@
 class matrix {
     private:
         int size;
-        double* data;
+        long double* data;
     public:
-        matrix(int n, double* numbers);
+        matrix(int n, long double* numbers);
         void checkout();
 
-        void str_sub(int a, int b, double lambda);
-        void to_up_triangale();
+        void str_sub(int a, int b, long double lambda);
+        void switch_str(int a, int b);
+        int to_up_triangale();
         void make_diag();
-        double gauss_det();
+        long double gauss_det();
         
         matrix make_addition(int i, int j);
-        double minor_det();
+        long double minor_det();
 };
 
 
