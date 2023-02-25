@@ -1,7 +1,7 @@
 #include "setup.h"
 
 //-------------------
-// Gauss determinant
+// Gauss determinant>
 //-------------------
 
 int square_matrix::to_up_triangale() {
@@ -42,7 +42,7 @@ long double square_matrix::mul_diag() {
 }
 
 long double square_matrix::gauss_det() {
-    matrix cpy = *this;
+    square_matrix cpy = *this;
 
     long double det;
     if ((cpy.to_up_triangale() % 2) == 0) det = 1;
@@ -73,14 +73,14 @@ square_matrix square_matrix::make_addition(int i, int j) {
             }
         }
     }
-    matrix addition (size-1, numbers);
+    square_matrix addition (size-1, size-1, numbers);
     return addition;
 }
 
 long double square_matrix::minor_det() {
     if (size == 1) return (data[0]);
 
-    matrix addition = make_addition(0, 0); 
+    square_matrix addition = make_addition(0, 0); 
     long double result = 0;
     int sign = 1;
 

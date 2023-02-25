@@ -1,32 +1,30 @@
 #include "setup.h"
 
-matrix::matrix (int strs, int clmns, long double* numbers) : num_of_strings(strs), num_of_columns(clmns) {
-    //std::cout << "Usual constructor of " << this << std::endl;
+matrix::matrix (int strs, int clmns, long double* numbers) : 
+    num_of_strings(strs), num_of_columns(clmns) {
+        // std::cout << "Usual constructor of " << this << std::endl;
 
-    data = new long double [num_of_strings * num_of_columns];
+        data = new long double [num_of_strings * num_of_columns];
 
-    for (int i = 0; i < num_of_strings; ++i) {
-        for (int j = 0; j < num_of_columns; ++j) {
-            data [i*num_of_columns + j] = numbers [i*num_of_columns + j];
+        for (int i = 0; i < num_of_strings; ++i) {
+            for (int j = 0; j < num_of_columns; ++j) {
+                data [i*num_of_columns + j] = numbers [i*num_of_columns + j];
+            }
         }
     }
-}
 
-matrix::matrix (const matrix& source) {
-    //std::cout << "Copy constructor of " << this << std::endl;
-    
-    num_of_strings = source.num_of_strings;
-    num_of_columns = source.num_of_columns;
+matrix::matrix (const matrix& source) : 
+    num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns) {
+        //std::cout << "Copy constructor of " << this << std::endl;
 
-    data = new long double[source.num_of_strings * source.num_of_columns];
+        data = new long double[source.num_of_strings * source.num_of_columns];
 
-    for (int i = 0; i < num_of_strings; ++i) {
-        for (int j = 0; j < num_of_columns; ++j) {
-            data [i*num_of_columns + j] = (source.data) [i*num_of_columns + j];
-        }
+        for (int i = 0; i < num_of_strings; ++i) {
+            for (int j = 0; j < num_of_columns; ++j) {
+                data [i*num_of_columns + j] = (source.data) [i*num_of_columns + j];
+            }
+        }  
     }
-    
-}
 
 matrix::~matrix () {
     //std::cout << "Distructor of " << this << std::endl;
@@ -50,12 +48,30 @@ matrix& matrix::operator= (const matrix& source) {
 
     for (int i = 0; i < num_of_strings; ++i) {
         for (int j = 0; j < num_of_columns; ++j) {
-            data [i * num_of_columns + j] = (source.data) [i*num_of_columns + j];
+            data [i * num_of_columns + j] = (source.data) [i * num_of_columns + j];
         }
     }
 
     return *this;
 }
+
+matrix& matrix::operator+= (const matrix& source) {
+    for (int i = 0; i < num_of_strings; ++i) {
+        for (int j = 0; j < num_of_columns; ++j) {
+            data [i * num_of_columns + j] += (source.data) [i * num_of_columns + j];
+        }
+    }
+
+    return *this;
+}
+
+matrix operator+ (const matrix &A, const matrix& B)
+{
+    matrix sum = A;
+    sum += B;
+    return sum;
+}
+
 
 void matrix::str_sub(int a, int b, long double lambda) {
     for (int j = 0; j < num_of_columns; ++j) {
