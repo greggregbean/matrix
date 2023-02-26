@@ -57,10 +57,23 @@ int main() {
     //-----------------
     // Matrix addition
     //-----------------
-        std::cout << "Matrix addition:" << std::endl;
-        matrix C = A + B;
-        C.checkout();
+        // std::cout << "Matrix addition:" << std::endl;
+        // matrix C = A + B;
+        // C.checkout();
 
+    //----------
+    // Neg_copy
+    //----------
+        std::cout << "Negative copy" << std::endl;
+        matrix neg_A = -A;
+        neg_A.checkout();
+
+    //--------------------
+    // Matrix subtraction
+    //--------------------
+        std::cout << "Matrix subtraction" << std::endl;
+        matrix F = A - B;
+        F.checkout();
 
     //-------------
     // Matrix copy
