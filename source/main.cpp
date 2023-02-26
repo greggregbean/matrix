@@ -53,6 +53,34 @@ int main() {
         std::cout << "Matrix:" << std::endl;
         square_matrix B (strs, clmns, numbers_B);
         B.checkout();
+    
+    //-----------------------------
+    // Unary matrix multiplication
+    //-----------------------------
+        std::cout << "Unary matrix multiplication:" << std::endl;
+        A *= B;
+        A.checkout();
+    
+    //------------------------------
+    // Binary matrix multiplication
+    //------------------------------
+        // std::cout << "Matrix multiplication:" << std::endl;
+        // matrix C = A * B;
+        // C.checkout();
+    
+    //----------------------------------------
+    // Binary multiplication matrix by number
+    //----------------------------------------
+        // std::cout << "Binary multiplication matrix by 2.2:" << std::endl;
+        // matrix C = 2.2 * A;
+        // C.checkout(); 
+
+    //---------------------------------------
+    // Unary multiplication matrix by number
+    //---------------------------------------
+        // std::cout << "Multiplication matrix by 2.2:" << std::endl;
+        // A *= 2.2;
+        // A.checkout();
 
     //-----------------
     // Matrix addition
@@ -64,16 +92,16 @@ int main() {
     //----------
     // Neg_copy
     //----------
-        std::cout << "Negative copy" << std::endl;
-        matrix neg_A = -A;
-        neg_A.checkout();
+        // std::cout << "Negative copy" << std::endl;
+        // matrix neg_A = -A;
+        // neg_A.checkout();
 
     //--------------------
     // Matrix subtraction
     //--------------------
-        std::cout << "Matrix subtraction" << std::endl;
-        matrix F = A - B;
-        F.checkout();
+        // std::cout << "Matrix subtraction" << std::endl;
+        // matrix F = A - B;
+        // F.checkout();
 
     //-------------
     // Matrix copy

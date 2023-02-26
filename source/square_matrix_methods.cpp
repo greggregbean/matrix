@@ -1,9 +1,9 @@
 #include "setup.h"
 
 //-------------------
-// Gauss determinant>
+// Gauss determinant
 //-------------------
-    int square_matrix::to_up_triangale() {
+    int square_matrix::to_up_triangale () {
         int count_switch = 0;
 
         for (int i = 0; i < size; ++i) {
@@ -31,7 +31,7 @@
         return count_switch;
     }
 
-    long double square_matrix::mul_diag() {
+    long double square_matrix::mul_diag () {
         long double res = 1;
         for (int i = 0; i < size; ++i) {
             if (data[i*size + i] == 0) return 0;
@@ -40,7 +40,7 @@
         return res;
     }
 
-    long double square_matrix::gauss_det() {
+    long double square_matrix::gauss_det () {
         square_matrix cpy = *this;
 
         long double det;
@@ -55,7 +55,7 @@
 //-------------------
 // Minor determinant
 //-------------------
-    square_matrix square_matrix::make_addition(int i, int j) {
+    square_matrix square_matrix::make_addition (int i, int j) {
         long double numbers[(size-1)*(size-1)];
         int pos = 0;
 
@@ -75,7 +75,7 @@
         return addition;
     }
 
-    long double square_matrix::minor_det() {
+    long double square_matrix::minor_det () {
         if (size == 1) return (data[0]);
 
         square_matrix addition = make_addition(0, 0); 
