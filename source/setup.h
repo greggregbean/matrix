@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include <cmath>
 
 #define VERIFIED     1
 #define NOT_VERIFIED 0
@@ -30,20 +28,19 @@
             matrix        operator-  () const;                                      // Unary operator -
             friend matrix operator*  (const matrix& A, const matrix& B);            // Binary operator*
             matrix&       operator*= (const long double& lambda);                   // Unary operator* by lamda
-            matrix&       operator*= (const matrix& source);
-            
+            matrix&       operator*= (const matrix& source);                        // Unary operator* by another matrix
+
             void checkout ();                                                       // Simple dump
 
-            void str_sub    (int a, int b, long double lambda);                     // Makes string (a) - lambda * string(b)
-            void switch_str (int a, int b);                                         // Switches string (a) with string (b)
+            void str_sub     (int a, int b, long double lambda);                    // Makes string (a) - lambda * string(b)
+            void switch_str  (int a, int b);                                        // Switches string (a) with string (b)
+            matrix transpose ();                                                    // Transpose matrix
     }; 
 
     matrix operator+ (const matrix& A, const matrix& B);                            // Binary operator+
     matrix operator- (const matrix& A, const matrix& B);                            // Binary operator-
     matrix operator* (const matrix& A, const long double& lambda);                  // Binary operator* by lambda
-    matrix operator* (const long double& lambda, const matrix& A);  
-
-    long double scalar_mul (const std::vector <long double> & vect_1, const std::vector <long double> & vect_2);
+    matrix operator* (const long double& lambda, const matrix& A);                  // Binary operator* by lambda
                                                              
 //---------------                                             
 // SQUARE MATRIX                                              

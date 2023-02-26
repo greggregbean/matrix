@@ -32,34 +32,41 @@ int main() {
     //----------
     // Matrix B
     //----------
-        std::cout << "Enter number of strings:" << std::endl;
-        std::cin >> strs;
-        std::cout << std::endl;
+        // std::cout << "Enter number of strings:" << std::endl;
+        // std::cin >> strs;
+        // std::cout << std::endl;
 
-        std::cout << "Enter number of columns:" << std::endl;
-        std::cin >> clmns;
-        std::cout << std::endl;
+        // std::cout << "Enter number of columns:" << std::endl;
+        // std::cin >> clmns;
+        // std::cout << std::endl;
 
-        long double numbers_B [strs * clmns];
+        // long double numbers_B [strs * clmns];
 
-        std::cout << "Enter data of matrix:" << std::endl;
-        for(int i = 0; i < strs; ++i) {
-            for(int j = 0; j < clmns; ++j) {
-                std::cin >> numbers_B [clmns*i + j];
-            }
-        }
-        std::cout << std::endl;
+        // std::cout << "Enter data of matrix:" << std::endl;
+        // for(int i = 0; i < strs; ++i) {
+        //     for(int j = 0; j < clmns; ++j) {
+        //         std::cin >> numbers_B [clmns*i + j];
+        //     }
+        // }
+        // std::cout << std::endl;
 
-        std::cout << "Matrix:" << std::endl;
-        square_matrix B (strs, clmns, numbers_B);
-        B.checkout();
+        // std::cout << "Matrix:" << std::endl;
+        // square_matrix B (strs, clmns, numbers_B);
+        // B.checkout();
     
+    //-----------------
+    // Matrix transpose
+    //-----------------
+        std::cout << "Matrix transpose:" << std::endl;
+        matrix A_transp = A.transpose();
+        A_transp.checkout();
+
     //-----------------------------
     // Unary matrix multiplication
     //-----------------------------
-        std::cout << "Unary matrix multiplication:" << std::endl;
-        A *= B;
-        A.checkout();
+        // std::cout << "Unary matrix multiplication:" << std::endl;
+        // A *= B;
+        // A.checkout();
     
     //------------------------------
     // Binary matrix multiplication

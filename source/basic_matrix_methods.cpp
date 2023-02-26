@@ -209,17 +209,15 @@
         }
     }
 
-    long double scalar_mul (const std::vector <long double> & vect_1, const std::vector <long double> & vect_2) {
-        if (vect_1.size() != vect_2.size()) {
-            std::cout << "Size of vector " << &vect_1 << " not equal to size of " << &vect_2 << "!!!" << std::endl;
-            return  std::nanl("1");
+    matrix matrix::transpose () {
+        long double new_data [num_of_strings * num_of_strings];
+        int i, j;
+        
+        for (int n = 0; n < num_of_strings * num_of_columns; ++n) {
+            i = n/num_of_strings;
+            j = n%num_of_strings;
+            new_data [n] = data [num_of_columns * j + i];
         }
 
-        long double sum = 0;
-
-        for (int i = 0; i < vect_1.size(); ++i) {
-            sum += (vect_1 [i] * vect_2 [i]);
-        }
-
-        return sum;
+        return matrix (num_of_columns, num_of_strings, new_data);
     }
