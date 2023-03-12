@@ -1,4 +1,4 @@
-#include "setup.h"
+#include "setup.hpp"
 
 //-------------------
 // Gauss determinant
@@ -56,7 +56,7 @@
 // Minor determinant
 //-------------------
     square_matrix square_matrix::make_addition (int i, int j) {
-        long double numbers[(size-1)*(size-1)];
+        long double* numbers = new long double [(size-1)*(size-1)];
         int pos = 0;
 
         for (int n = 0; n < size; ++n) {
@@ -72,13 +72,15 @@
             }
         }
         square_matrix addition (size-1, size-1, numbers);
+        delete numbers;
+
         return addition;
     }
 
     long double square_matrix::minor_det () {
         if (size == 1) return (data[0]);
 
-        square_matrix addition = make_addition(0, 0); 
+        square_matrix addition = this -> make_addition(0, 0); 
         long double result = 0;
         int sign = 1;
 
@@ -86,7 +88,7 @@
             result += (sign)*(data[j])*(addition.minor_det());
             sign *= (-1);
             if((j + 1) != size) {
-                addition = make_addition(0, j + 1);
+                square_matrix result = this -> make_addition(0, j + 1);
             }
         }
 

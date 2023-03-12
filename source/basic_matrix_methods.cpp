@@ -1,11 +1,11 @@
-#include "setup.h"
+#include "setup.hpp"
 
 //--------------
 // Construction
 //--------------
     matrix::matrix (int strs, int clmns, long double* numbers) : 
         num_of_strings(strs), num_of_columns(clmns) {
-            // std::cout << "Usual constructor of " << this << std::endl;
+            std::cout << "Usual constructor of " << this << std::endl;
 
             data = new long double [num_of_strings * num_of_columns];
 
@@ -18,7 +18,7 @@
 
     matrix::matrix (const matrix& source) : 
         num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns) {
-            //std::cout << "Copy constructor of " << this << std::endl;
+            std::cout << "Copy constructor of " << this << std::endl;
 
             data = new long double[source.num_of_strings * source.num_of_columns];
 
@@ -73,9 +73,10 @@
         if ((num_of_strings * num_of_columns) != (source.num_of_strings * source.num_of_columns)) {
             delete data;
             data = new long double [source.num_of_strings * source.num_of_columns];
-            num_of_strings = source.num_of_strings;
-            num_of_columns = source.num_of_columns;
         }
+
+        num_of_strings = source.num_of_strings;
+        num_of_columns = source.num_of_columns;
 
         for (int i = 0; i < num_of_strings; ++i) {
             for (int j = 0; j < num_of_columns; ++j) {
@@ -160,7 +161,7 @@
             return A;
         }
 
-        long double data [A.num_of_strings * B.num_of_columns];
+        long double* data = new long double [A.num_of_strings * B.num_of_columns];
 
         for (int m = 0; m < A.num_of_strings; ++m) {
             for (int k = 0; k < B.num_of_columns; ++k) {
@@ -175,6 +176,8 @@
         }
         
         matrix C (A.num_of_strings, B.num_of_columns, data);
+
+        delete data;
 
         return C;
     }
@@ -210,7 +213,7 @@
     }
 
     matrix matrix::transpose () {
-        long double new_data [num_of_strings * num_of_strings];
+        long double* new_data = new long double [num_of_strings * num_of_strings];
         int i, j;
         
         for (int n = 0; n < num_of_strings * num_of_columns; ++n) {
@@ -218,6 +221,8 @@
             j = n%num_of_strings;
             new_data [n] = data [num_of_columns * j + i];
         }
+
+        delete new_data;
 
         return matrix (num_of_columns, num_of_strings, new_data);
     }

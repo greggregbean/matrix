@@ -1,4 +1,4 @@
-#include "setup.h"
+#include "setup.hpp"
 
 int main() {
     //----------
@@ -14,7 +14,7 @@ int main() {
         std::cin >> clmns;
         std::cout << std::endl;
 
-        long double numbers_A [strs * clmns];
+        long double* numbers_A = new long double [strs * clmns];
 
         std::cout << "Enter data of matrix:" << std::endl;
         for(int i = 0; i < strs; ++i) {
@@ -28,38 +28,47 @@ int main() {
         std::cout << "Matrix:" << std::endl;
         square_matrix A (strs, clmns, numbers_A);
         A.checkout();
+        delete numbers_A;
     
     //----------
     // Matrix B
     //----------
-        // std::cout << "Enter number of strings:" << std::endl;
-        // std::cin >> strs;
-        // std::cout << std::endl;
+        std::cout << "Enter number of strings:" << std::endl;
+        std::cin >> strs;
+        std::cout << std::endl;
 
-        // std::cout << "Enter number of columns:" << std::endl;
-        // std::cin >> clmns;
-        // std::cout << std::endl;
+        std::cout << "Enter number of columns:" << std::endl;
+        std::cin >> clmns;
+        std::cout << std::endl;
 
-        // long double numbers_B [strs * clmns];
+        long double* numbers_B = new long double [strs * clmns];
 
-        // std::cout << "Enter data of matrix:" << std::endl;
-        // for(int i = 0; i < strs; ++i) {
-        //     for(int j = 0; j < clmns; ++j) {
-        //         std::cin >> numbers_B [clmns*i + j];
-        //     }
-        // }
-        // std::cout << std::endl;
+        std::cout << "Enter data of matrix:" << std::endl;
+        for(int i = 0; i < strs; ++i) {
+            for(int j = 0; j < clmns; ++j) {
+                std::cin >> numbers_B [clmns*i + j];
+            }
+        }
+        std::cout << std::endl;
 
-        // std::cout << "Matrix:" << std::endl;
-        // square_matrix B (strs, clmns, numbers_B);
-        // B.checkout();
+        std::cout << "Matrix:" << std::endl;
+        square_matrix B (strs, clmns, numbers_B);
+        B.checkout();
+        delete numbers_B;
     
+    //--------------
+    // Matrix equal
+    //--------------
+        std::cout << "Operator=:" << std::endl;
+        A = B;
+        A.checkout();
+
     //-----------------
     // Matrix transpose
     //-----------------
-        std::cout << "Matrix transpose:" << std::endl;
-        matrix A_transp = A.transpose();
-        A_transp.checkout();
+        // std::cout << "Matrix transpose:" << std::endl;
+        // matrix A_transp = A.transpose();
+        // A_transp.checkout();
 
     //-----------------------------
     // Unary matrix multiplication

@@ -47,13 +47,13 @@
 //---------------                                                                                                        
     class square_matrix : public matrix {                         
         private:                                                  
-            int size;                                             
+            int size = this -> num_of_strings;                                             
                                                                 
         public: 
             square_matrix(int strs, int clmns, long double* numbers):    // Usual constructor
-                matrix(strs, clmns, numbers), size(strs) {}             
-            square_matrix(const square_matrix& source):                  // Copy constructor
-                matrix(source), size(source.num_of_strings) {}          
+                matrix(strs, clmns, numbers) {}             
+            // square_matrix(const square_matrix& source):                  // Copy constructor
+            //     matrix(source) {}          
 
             int   to_up_triangale ();                                    // Turns matrix with simple operations to upper triangular type
             long double  mul_diag ();                                    // Multiplies diagonal elements
