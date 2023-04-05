@@ -3,7 +3,8 @@
 //--------------
 // Construction
 //--------------
-    matrix::matrix (int strs, int clmns, long double* numbers) : 
+    template <typename T>
+    matrix<T>::matrix (int strs, int clmns, T* numbers) : 
         num_of_strings(strs), num_of_columns(clmns) {
             std::cout << "Usual constructor of " << this << std::endl;
 
@@ -16,7 +17,8 @@
             }
         }
 
-    matrix::matrix (const matrix& source) : 
+    template <typename T>
+    matrix<T>::matrix (const matrix<T>& source) : 
         num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns) {
             std::cout << "Copy constructor of " << this << std::endl;
 
@@ -29,7 +31,8 @@
             }  
         }
 
-    matrix::~matrix () {
+    template <typename T>
+    matrix<T>::~matrix () {
         //std::cout << "Distructor of " << this << std::endl;
         delete data;
     }
@@ -37,7 +40,8 @@
 //------
 // Dump
 //------
-    void matrix::checkout () {
+    template <typename T>
+    void matrix<T>::checkout () {
         for (int i = 0; i < num_of_strings; ++i) {
             std::cout << "| ";
             for(int j = 0; j < num_of_columns; ++j) {
@@ -52,7 +56,8 @@
 //----------------------------
 // Verification for operators
 //----------------------------
-    int verification (const matrix& A, const matrix& B) {
+    template <typename T>
+    int verification (const matrix<T>& A, const matrix<T>& B) {
         if (A.num_of_columns != B.num_of_columns) {
             std::cout << "Matrix " << &A << " has no the same numers of columns as " << &B << "!!!" << std::endl;
             return NOT_VERIFIED; 
@@ -69,7 +74,8 @@
 //-----------------
 // Unary operators
 //-----------------
-    matrix& matrix::operator= (const matrix& source) {
+    template <typename T>
+    matrix<T>& matrix<T>::operator= (const matrix<T>& source) {
         if ((num_of_strings * num_of_columns) != (source.num_of_strings * source.num_of_columns)) {
             delete data;
             data = new long double [source.num_of_strings * source.num_of_columns];
@@ -87,7 +93,8 @@
         return *this;
     }
 
-    matrix& matrix::operator+= (const matrix& source) {
+    template <typename T>
+    matrix<T>& matrix<T>::operator+= (const matrix<T>& source) {
         if (verification(*this, source) == NOT_VERIFIED) {
             std::cout << "Error in operator+= !!!" << std::endl;
             return *this;
@@ -102,7 +109,8 @@
         return *this;
     }
 
-    matrix matrix::operator- () const {
+    template <typename T>
+    matrix<T> matrix<T>::operator- () const {
         matrix neg_cpy = *this;
 
         for (int i = 0; i < num_of_strings; ++i) {
@@ -114,7 +122,8 @@
         return neg_cpy;
     }
 
-    matrix& matrix::operator*= (const long double& lambda) {
+    template <typename T>
+    matrix<T>& matrix<T>::operator*= (const long double& lambda) {
         for (int i = 0; i < num_of_strings; ++i) {
             for (int j = 0; j < num_of_columns; ++j) {
                 data [i * num_of_columns + j] *= lambda;
@@ -124,7 +133,8 @@
         return *this;
     }
 
-    matrix& matrix::operator*= (const matrix& source) {
+    template <typename T>
+    matrix<T>& matrix<T>::operator*= (const matrix<T>& source) {
         *this = (*this) * source;
         return *this;
     }
@@ -132,7 +142,8 @@
 //------------------
 // Binary operators
 //------------------
-    matrix operator+ (const matrix &A, const matrix& B)
+    template <typename T>
+    matrix<T> operator+ (const matrix<T>& A, const matrix<T>& B)
     {
         if (verification(A, B) == NOT_VERIFIED) {
             std::cout << "Error in binary operator+ !!!" << std::endl;
@@ -144,7 +155,8 @@
         return sum;
     }
 
-    matrix operator- (const matrix &A, const matrix& B) {
+    template <typename T>
+    matrix<T> operator- (const matrix<T>& A, const matrix<T>& B) {
         if (verification(A, B) == NOT_VERIFIED) {
             std::cout << "Error in binary operator- !!!" << std::endl;
             return A;
@@ -155,7 +167,8 @@
         return sub;
     }
 
-    matrix operator* (const matrix& A, const matrix& B) {
+    template <typename T>
+    matrix<T> operator* (const matrix<T>& A, const matrix<T>& B) {
         if (A.num_of_columns != B.num_of_strings) {
             std::cout << "Number of strings in matrix " << &A << " is not equal to number of columns in " << &B << "!!!" << std::endl;
             return A;
@@ -182,13 +195,15 @@
         return C;
     }
 
-    matrix operator* (const matrix& A, const long double& lambda) {
+    template <typename T>
+    matrix<T> operator* (const matrix<T>& A, const long double& lambda) {
         matrix C = A;
         C *= lambda;
         return C;
     }
 
-    matrix operator* (const long double& lambda, const matrix& A) {
+    template <typename T>
+    matrix<T> operator* (const long double& lambda, const matrix<T>& A) {
         matrix C = A;
         C *= lambda;
         return C;
@@ -197,13 +212,15 @@
 //------------------------
 // Other matrix functions
 //------------------------
-    void matrix::str_sub (int a, int b, long double lambda) {
+    template <typename T>
+    void matrix<T>::str_sub (int a, int b, long double lambda) {
         for (int j = 0; j < num_of_columns; ++j) {
             data [a * num_of_columns + j] -= lambda * data [b * num_of_columns + j];
         }
     }
 
-    void matrix::switch_str (int a, int b) {
+    template <typename T>
+    void matrix<T>::switch_str (int a, int b) {
         long double tmp;
         for (int j = 0; j < num_of_columns; ++j) {
             tmp = data[a * num_of_columns + j];
@@ -212,7 +229,8 @@
         }
     }
 
-    matrix matrix::transpose () {
+    template <typename T>
+    matrix<T> matrix<T>::transpose () {
         long double* new_data = new long double [num_of_strings * num_of_strings];
         int i, j;
         

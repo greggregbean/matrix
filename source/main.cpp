@@ -26,7 +26,7 @@ int main() {
 
 
         std::cout << "Matrix:" << std::endl;
-        square_matrix A (strs, clmns, numbers_A);
+        square_matrix<long double> A (strs, clmns, numbers_A);
         A.checkout();
         delete numbers_A;
     
@@ -52,7 +52,7 @@ int main() {
         std::cout << std::endl;
 
         std::cout << "Matrix:" << std::endl;
-        square_matrix B (strs, clmns, numbers_B);
+        square_matrix<long double> B (strs, clmns, numbers_B);
         B.checkout();
         delete numbers_B;
     

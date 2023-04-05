@@ -10,49 +10,50 @@
 //--------
 // MATRIX
 //--------
-    class matrix {
+    template <typename T> class matrix {
         protected:
             int num_of_strings;
             int num_of_columns;                            
-            long double* data;
+            T* data;
 
         public:
-            matrix  (int strs, int clmns, long double* numbers);                    // Usual constructor
-            matrix  (const matrix& source);                                         // Copy constructor
-            ~matrix ();                                                             // Distructor
+            matrix  (int strs, int clmns, T* numbers);  // Usual constructor
+            matrix  (const matrix<T>& source);          // Copy constructor
+            ~matrix ();                                 // Distructor
 
-            friend int verification  (const matrix& A, const matrix& B);            // Verifies if number of columns and number of strings in A & B are correct
+     friend int verification  (const matrix<T>& A, const matrix<T>& B); // Verifies if number of columns and 
+                                                                        // number of strings in A & B are correct
 
-            matrix&       operator=  (const matrix& source);                        // Operator =
-            matrix&       operator+= (const matrix& source);                        // Operator +=
-            matrix        operator-  () const;                                      // Unary operator -
-            friend matrix operator*  (const matrix& A, const matrix& B);            // Binary operator*
-            matrix&       operator*= (const long double& lambda);                   // Unary operator* by lamda
-            matrix&       operator*= (const matrix& source);                        // Unary operator* by another matrix
+            matrix<T>& operator=  (const matrix<T>& source);                // Operator =
+            matrix<T>& operator+= (const matrix<T>& source);                // Operator +=
+            matrix<T>  operator-  () const;                                 // Unary operator -
+     friend matrix<T>  operator*  (const matrix<T>& A, const matrix<T>& B); // Binary operator*
+            matrix<T>& operator*= (const long double& lambda);              // Unary operator* by lamda
+            matrix<T>& operator*= (const matrix<T>& source);                // Unary operator* by another matrix
 
-            void checkout ();                                                       // Simple dump
+            void checkout ();  // Simple dump
 
-            void str_sub     (int a, int b, long double lambda);                    // Makes string (a) - lambda * string(b)
-            void switch_str  (int a, int b);                                        // Switches string (a) with string (b)
-            matrix transpose ();                                                    // Transpose matrix
+            void str_sub     (int a, int b, long double lambda); // Makes string (a) - lambda * string(b)
+            void switch_str  (int a, int b);                     // Switches string (a) with string (b)
+            matrix transpose ();                                 // Transpose matrix
     }; 
 
-    matrix operator+ (const matrix& A, const matrix& B);                            // Binary operator+
-    matrix operator- (const matrix& A, const matrix& B);                            // Binary operator-
-    matrix operator* (const matrix& A, const long double& lambda);                  // Binary operator* by lambda
-    matrix operator* (const long double& lambda, const matrix& A);                  // Binary operator* by lambda
+    template <typename T> matrix<T> operator+ (const matrix<T>& A, const matrix<T>& B);       // Binary operator+
+    template <typename T> matrix<T> operator- (const matrix<T>& A, const matrix<T>& B);       // Binary operator-
+    template <typename T> matrix<T> operator* (const matrix<T>& A, const long double& lambda);// Binary operator* by lambda
+    template <typename T> matrix<T> operator* (const long double& lambda, const matrix<T>& A);// Binary operator* by lambda
                                                              
 //---------------                                             
 // SQUARE MATRIX                                              
 //---------------                                                                                                        
-    class square_matrix : public matrix {                         
+    template <typename T> class square_matrix : public matrix<T> {                         
         private:                                                  
             int size = this -> num_of_strings;                                             
                                                                 
         public: 
             square_matrix(int strs, int clmns, long double* numbers):    // Usual constructor
                 matrix(strs, clmns, numbers) {}             
-            // square_matrix(const square_matrix& source):                  // Copy constructor
+            // square_matrix(const square_matrix& source):               // Copy constructor
             //     matrix(source) {}          
 
             int   to_up_triangale ();                                    // Turns matrix with simple operations to upper triangular type
