@@ -1,5 +1,4 @@
-#ifndef SETUP_H
-#define SETUP_H
+#pragma once
 
 #include <iostream>
 #include <iomanip>
@@ -17,52 +16,93 @@
             T* data;
 
         public:
-            matrix  (int strs, int clmns, T* numbers);  // Usual constructor
-            matrix  (const matrix<T>& source);          // Copy constructor
-            ~matrix ();                                 // Distructor
+            // Costruction:
+            matrix  (int strs, int clmns, const T* i_data);  
+            matrix  (const matrix<T>& source);   
+            matrix  (matrix<T>&& rhs);       
+            ~matrix (); 
 
-     friend int verification  (const matrix<T>& A, const matrix<T>& B); // Verifies if number of columns and 
-                                                                        // number of strings in A & B are correct
+            // Getters:
+            int get_num_of_strings() const {return num_of_strings;}    
+            int get_num_of_columns() const {return num_of_columns;}   
 
-            matrix<T>& operator=  (const matrix<T>& source);                // Operator =
-            matrix<T>& operator+= (const matrix<T>& source);                // Operator +=
-            matrix<T>  operator-  () const;                                 // Unary operator -
-     friend matrix<T>  operator*  (const matrix<T>& A, const matrix<T>& B); // Binary operator*
-            matrix<T>& operator*= (const long double& lambda);              // Unary operator* by lamda
-            matrix<T>& operator*= (const matrix<T>& source);                // Unary operator* by another matrix
+            // Simple dump:
+            void checkout ();   
 
-            void checkout ();  // Simple dump
+            // Verifies if number of columns and number of strings in A & B are correct:
+            template <typename T1>
+            friend int verification   (const matrix<T1>& A, const matrix<T1>& B); 
 
-            void str_sub     (int a, int b, long double lambda); // Makes string (a) - lambda * string(b)
-            void switch_str  (int a, int b);                     // Switches string (a) with string (b)
-            matrix transpose ();                                 // Transpose matrix
+            // Unary operstors:
+            matrix<T>& operator=  (const matrix<T>& source);
+            matrix<T>& operator=  (matrix<T>&& source);                
+            matrix<T>& operator+= (const matrix<T>&  source);                
+            matrix<T>  operator-  () const;                                 
+            matrix<T>& operator*= (const T& lambda);              
+            matrix<T>& operator*= (const matrix<T>& source);  
+
+            // Binary operator*:
+            template <typename T1>
+            friend matrix<T1> operator* (const matrix<T1>& A, const matrix<T1>& B);               
+
+            // Other matrix functions:
+            void str_sub     (int a, int b, const T& lambda); 
+            void switch_str  (int a, int b);                     
+            matrix<T> transpose ();                                 
     }; 
 
-    template <typename T> matrix<T> operator+ (const matrix<T>& A, const matrix<T>& B);       // Binary operator+
-    template <typename T> matrix<T> operator- (const matrix<T>& A, const matrix<T>& B);       // Binary operator-
-    template <typename T> matrix<T> operator* (const matrix<T>& A, const long double& lambda);// Binary operator* by lambda
-    template <typename T> matrix<T> operator* (const long double& lambda, const matrix<T>& A);// Binary operator* by lambda
+    // Binary operators:
+    template <typename T> matrix<T> operator+ (const matrix<T>& A, const matrix<T>& B);       
+    template <typename T> matrix<T> operator- (const matrix<T>& A, const matrix<T>& B);       
+    template <typename T> matrix<T> operator* (const matrix<T>& A, const T& lambda);
+    template <typename T> matrix<T> operator* (const T& lambda, const matrix<T>& A);
                                                              
 //---------------                                             
 // SQUARE MATRIX                                              
 //---------------                                                                                                        
     template <typename T> class square_matrix : public matrix<T> {                         
         private:                                                  
-            int size = this -> num_of_strings;                                             
+            int size;                                             
                                                                 
-        public: 
-            square_matrix(int strs, int clmns, long double* numbers):    // Usual constructor
-                matrix(strs, clmns, numbers) {}             
-            // square_matrix(const square_matrix& source):               // Copy constructor
-            //     matrix(source) {}          
-
-            int   to_up_triangale ();                                    // Turns matrix with simple operations to upper triangular type
-            long double  mul_diag ();                                    // Multiplies diagonal elements
-            long double gauss_det ();                                    // Counts the determinant by the Gauss method
+        public:
+            // Construction:
+            square_matrix(int i_size, const T* i_data) :
+                matrix<T>(i_size, i_size, i_data), size(i_size) {}  
+             
+            square_matrix(const square_matrix<T>& source) :               
+                matrix<T>(source), size(source.size) {}  
             
-            square_matrix make_addition (int i, int j);                  // Makes addition to [i,j] element
-            long double   minor_det ();                                  // Counts the determinant by the method with minors
+            square_matrix(const matrix<T>& source) :
+                matrix<T>(source), size(source.get_num_of_strings()) {
+                    if(source.get_num_of_columns() != source.get_num_of_strings()) 
+                        throw std::invalid_argument("In square_matrix ctor num_of_strings != num_of_columns.");
+                }
+
+
+            // Getter:
+            int get_size() const {return size;}
+
+            // Unary operators:
+            square_matrix<T>& operator=  (const square_matrix<T>& source);
+            square_matrix<T>& operator=  (square_matrix<T>&& source);
+            square_matrix<T>& operator+= (const square_matrix<T>& source);
+            square_matrix<T>  operator-  () const;
+            square_matrix<T>& operator*= (const T& lambda);              
+
+            // Gauss determinant:
+            int to_up_triangale ();                                    
+            T   mul_diag ();                                    
+            T   gauss_det ();  
+
+            // Minor determinant:
+            square_matrix<T> make_addition (int i, int j);
+            T   minor_det ();   
     };
 
+    // Binary operators:
+    template <typename T> square_matrix<T> operator+ (const square_matrix<T>& A, const square_matrix<T>& B);       
+    template <typename T> square_matrix<T> operator- (const square_matrix<T>& A, const square_matrix<T>& B); 
 
-#endif
+
+
+

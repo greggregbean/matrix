@@ -10,8 +10,8 @@ find_package(GTest)
 add_executable (
     run
     source/main.cpp
-    source/basic_matrix_methods.cpp
-    source/square_matrix_methods.cpp
+    source/basic_matrix_methods.hpp
+    source/square_matrix_methods.hpp
     source/setup.hpp
 )
 
@@ -24,7 +24,7 @@ if (MSVC)
 else ()
     target_compile_options (
         run PRIVATE
-        -Wall -Wextra -pedantic -Werror
+        -g -Wall -Wextra -pedantic -Werror
     )
 
 endif ()
