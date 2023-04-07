@@ -69,7 +69,7 @@
 // Verification for operators
 //----------------------------
     template <typename T>
-    int verification (const matrix<T>& A, const matrix<T>& B) {
+    int matrix<T>::verification (const matrix<T>& A, const matrix<T>& B)  {
 
         if (A.num_of_columns != B.num_of_columns) {
             std::cout << "Matrix " << &A << " has no the same numers of columns as " << &B << "." << std::endl;

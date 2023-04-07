@@ -30,8 +30,7 @@
             void checkout ();   
 
             // Verifies if number of columns and number of strings in A & B are correct:
-            template <typename T1>
-            friend int verification   (const matrix<T1>& A, const matrix<T1>& B); 
+            static int verification (const matrix<T>& A, const matrix<T>& B); 
 
             // Unary operstors:
             matrix<T>& operator=  (const matrix<T>& source);
