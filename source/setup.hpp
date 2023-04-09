@@ -20,7 +20,7 @@
             matrix  (int strs, int clmns, const T* i_data);  
             matrix  (const matrix<T>& source);   
             matrix  (matrix<T>&& rhs);       
-            ~matrix (); 
+            virtual ~matrix (); 
 
             // Getters:
             int get_num_of_strings() const {return num_of_strings;}    
@@ -59,7 +59,7 @@
 //---------------                                             
 // SQUARE MATRIX                                              
 //---------------                                                                                                        
-    template <typename T> class square_matrix : public matrix<T> {                         
+    template <typename T> class square_matrix final : public matrix<T>  {                         
         private:                                                  
             int size;                                             
                                                                 
@@ -76,6 +76,7 @@
                     if(source.get_num_of_columns() != source.get_num_of_strings()) 
                         throw std::invalid_argument("In square_matrix ctor num_of_strings != num_of_columns.");
                 }
+            ~square_matrix() {}
 
 
             // Getter:
