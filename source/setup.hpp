@@ -42,7 +42,10 @@
 
             // Binary operator*:
             template <typename T1>
-            friend matrix<T1> operator* (const matrix<T1>& A, const matrix<T1>& B);               
+            friend matrix<T1> operator* (const matrix<T1>& A, const matrix<T1>& B);
+
+            template <typename T1>
+            friend matrix<T1> cache_friendly_mul (const matrix<T1>& A, const matrix<T1>& B);               
 
             // Other matrix functions:
             void str_sub     (int a, int b, const T& lambda); 

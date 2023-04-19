@@ -199,10 +199,39 @@
     }
 
     template <typename T>
+    matrix<T> cache_friendly_mul (const matrix<T>& A, const matrix<T>& B) {
+
+        if (A.num_of_columns != B.num_of_strings) {
+            throw std::invalid_argument("In cache friendly matrix multiplication \
+            number of strings in first is not equal to number of columns in second.");
+        }
+
+        T* data = new T [A.num_of_strings * B.num_of_columns] {'\0'};
+
+        int Aik;
+
+        for (int k = 0; k < A.num_of_columns; ++k) {
+            for (int i = 0; i < A.num_of_strings; ++i) {
+                Aik = A.data[i*A.num_of_columns + k];
+
+                for (int j = 0; j < B.num_of_columns; ++j) {
+                    data[i*B.num_of_columns + j] += Aik * B.data[k*B.num_of_columns + j]; 
+                }
+            }
+        }
+
+        matrix<T> C (A.num_of_strings, B.num_of_columns, data);
+
+        delete [] data;
+
+        return C;
+    }
+
+    template <typename T>
     matrix<T> operator* (const matrix<T>& A, const matrix<T>& B) {
 
         if (A.num_of_columns != B.num_of_strings) {
-            throw std::invalid_argument("In " << &A << " * " << &B <<" \
+            throw std::invalid_argument("In matrix multiplication \
             number of strings in first is not equal to number of columns in second.");
         }
 
@@ -222,7 +251,7 @@
         
         matrix<T> C (A.num_of_strings, B.num_of_columns, data);
 
-        delete data;
+        delete [] data;
 
         return C;
     }
