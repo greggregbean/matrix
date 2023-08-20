@@ -6,4 +6,5 @@ Here is my realisation of matrix class. There are practically all basic matrix o
 If you want to see my matrix class in work, just clone the repo and than make Makefile and executables with CMake.
 
 So, I whish you like it. You can also look for another interesting projects in my profile. Have a nice day or night!
+
 (＠＾◡＾)
