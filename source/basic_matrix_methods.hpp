@@ -7,9 +7,9 @@
 //--------------
     template <typename T>
     matrix<T>::matrix (int strs, int clmns, const T* i_data) : 
-        num_of_strings(strs), num_of_columns(clmns) {
-        // std::cout << "Usual constructor of " << this << std::endl;
-
+        num_of_strings(strs), num_of_columns(clmns) 
+    {
+        //std::cout << "Usual constructor of " << this << std::endl;
         data = new T [num_of_strings * num_of_columns];
 
         for (int i = 0; i < num_of_strings; ++i) {
@@ -21,9 +21,9 @@
 
     template <typename T>
     matrix<T>::matrix (const matrix<T>& source) : 
-        num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns) {
-        // std::cout << "Copy constructor of " << this << std::endl;
-
+        num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns) 
+    {
+        //std::cout << "Copy constructor of " << this << std::endl;
         data = new T [source.num_of_strings * source.num_of_columns];
 
         for (int i = 0; i < num_of_strings; ++i) {
@@ -35,16 +35,17 @@
 
     template <typename T>
     matrix<T>::matrix (matrix<T>&& source) :
-        num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns), data(source.data) {
-        // std::cout << "Move constructor of " << this << std::endl;
-
+        num_of_strings(source.num_of_strings), num_of_columns(source.num_of_columns), data(source.data) 
+    {
+        //std::cout << "Move constructor of " << this << std::endl;
         source.data = nullptr;
+        source.num_of_strings = 0;
+        source.num_of_columns = 0;
     }
 
     template <typename T>
-    matrix<T>::~matrix () {
-        // std::cout << "Distructor of " << this << std::endl;
-
+    matrix<T>::~matrix () noexcept {
+        //std::cout << "Distructor of " << this << std::endl;
         delete [] data;
     }
 

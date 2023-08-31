@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <vector>  // not for my class, but for main.cpp
 
 #define VERIFIED     1
 #define NOT_VERIFIED 0
@@ -17,10 +18,10 @@
 
         public:
             // Costruction:
-            matrix  (int strs, int clmns, const T* i_data);  
-            matrix  (const matrix<T>& source);   
-            matrix  (matrix<T>&& rhs);       
-            virtual ~matrix (); 
+            matrix (int strs, int clmns, const T* i_data);  // usual
+            matrix (const matrix<T>& source);               // copy
+            matrix (matrix<T>&& rhs);                       // move 
+            virtual ~matrix() noexcept; 
 
             // Getters:
             int get_num_of_strings() const {return num_of_strings;}    
@@ -69,17 +70,16 @@
         public:
             // Construction:
             square_matrix(int i_size, const T* i_data) :
-                matrix<T>(i_size, i_size, i_data), size(i_size) {}  
-             
+                matrix<T>(i_size, i_size, i_data), size(i_size) {
+                    // std::cout << "Squre usual constructor of " << this << std::endl;
+                }      
             square_matrix(const square_matrix<T>& source) :               
-                matrix<T>(source), size(source.size) {}  
-            
-            square_matrix(const matrix<T>& source) :
-                matrix<T>(source), size(source.get_num_of_strings()) {
-                    if(source.get_num_of_columns() != source.get_num_of_strings()) 
-                        throw std::invalid_argument("In square_matrix ctor num_of_strings != num_of_columns.");
-                }
-            ~square_matrix() {}
+                matrix<T>(source), size(source.size) {
+                    // std::cout << "Square copy constructor of " << this << std::endl;
+                }             
+            square_matrix (const matrix<T>& source);
+            square_matrix (square_matrix<T>&& rhs);
+            ~square_matrix() noexcept {}
 
 
             // Getter:
@@ -94,12 +94,12 @@
 
             // Gauss determinant:
             int to_up_triangale ();                                    
-            T   mul_diag ();                                    
-            T   gauss_det ();  
+            T mul_diag ();                                    
+            T gauss_det ();  
 
             // Minor determinant:
             square_matrix<T> make_addition (int i, int j);
-            T   minor_det ();   
+            T minor_det ();   
     };
 
     // Binary operators:

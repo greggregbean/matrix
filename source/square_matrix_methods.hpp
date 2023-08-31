@@ -2,6 +2,26 @@
 
 #include "setup.hpp"
 
+//--------------
+// Construction
+//--------------
+    template <typename T>
+    square_matrix<T>::square_matrix (const matrix<T>& source) :
+        matrix<T>(source), size(source.get_num_of_strings()) 
+    {
+        // std::cout << "Square copy constructor of " << this << std::endl;
+        if(source.num_of_columns() != source.num_of_strings()) 
+            throw std::invalid_argument("In square_matrix ctor num_of_strings != num_of_columns.");
+    }
+
+    template <typename T>
+    square_matrix<T>::square_matrix (square_matrix<T>&& rhs) : 
+        matrix<T>(std::move(rhs)), size(rhs.size) 
+    {   
+        // std::cout << "Square move constructor of " << this << std::endl;
+        rhs.size = 0;
+    }
+
 //-----------------
 // Unary operators
 //-----------------
