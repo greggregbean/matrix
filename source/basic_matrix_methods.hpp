@@ -26,11 +26,19 @@
         //std::cout << "Copy constructor of " << this << std::endl;
         data = new T [source.num_of_strings * source.num_of_columns];
 
-        for (int i = 0; i < num_of_strings; ++i) {
-            for (int j = 0; j < num_of_columns; ++j) {
-                data [i*num_of_columns + j] = (source.data) [i*num_of_columns + j];
-            }
-        }  
+        try {
+            for (int i = 0; i < num_of_strings; ++i) {
+                for (int j = 0; j < num_of_columns; ++j) {
+                    data [i*num_of_columns + j] = source.data [i*num_of_columns + j];
+                }
+            }  
+        }
+
+        catch (...)
+        {
+            delete [] data;
+            throw;
+        }
     }
 
     template <typename T>
@@ -39,8 +47,6 @@
     {
         //std::cout << "Move constructor of " << this << std::endl;
         source.data = nullptr;
-        source.num_of_strings = 0;
-        source.num_of_columns = 0;
     }
 
     template <typename T>
@@ -102,7 +108,7 @@
 
         for (int i = 0; i < num_of_strings; ++i) {
             for (int j = 0; j < num_of_columns; ++j) {
-                data [i * num_of_columns + j] = (source.data) [i * num_of_columns + j];
+                data [i * num_of_columns + j] = source.data [i * num_of_columns + j];
             }
         }
 
@@ -134,7 +140,7 @@
 
         for (int i = 0; i < num_of_strings; ++i) {
             for (int j = 0; j < num_of_columns; ++j) {
-                data [i * num_of_columns + j] += (source.data) [i * num_of_columns + j];
+                data [i * num_of_columns + j] += source.data [i * num_of_columns + j];
             }
         }
 
